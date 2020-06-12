@@ -1,4 +1,4 @@
-class ChangeWaitingListsToStockRequests < ActiveRecord::Migration
+class ChangeWaitingListsToStockRequests < ActiveRecord::Migration[4.2]
   def self.up
     rename_table :waiting_lists, :stock_requests
   end

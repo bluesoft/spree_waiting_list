@@ -1,4 +1,4 @@
-class CreateWaitingLists < ActiveRecord::Migration
+class CreateWaitingLists < ActiveRecord::Migration[4.2]
   def self.up
     create_table :waiting_lists do |t|
       t.string :email

@@ -1,4 +1,4 @@
-class ChangeWaitingListToSpreeWaitingList < ActiveRecord::Migration
+class ChangeWaitingListToSpreeWaitingList < ActiveRecord::Migration[4.2]
   def self.up
     rename_table :stock_requests, :spree_stock_requests
 

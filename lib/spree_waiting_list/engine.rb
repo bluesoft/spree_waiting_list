@@ -1,8 +1,9 @@
 module SpreeWaitingList
   class Engine < Rails::Engine
     require 'spree/core'
-    isolate_namespace Spree
     engine_name 'spree_waiting_list'
+
+    config.autoload_paths += %W(#{config.root}/lib)
 
     # use rspec for tests
     config.generators do |g|
@@ -10,12 +11,12 @@ module SpreeWaitingList
     end
 
     def self.activate
-      Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
-        Rails.configuration.cache_classes ? require(c) : load(c)
+      cache_klasses = %W(#{config.root}/app/**/*_decorator*.rb #{config.root}/app/overrides/*.rb)
+      Dir.glob(cache_klasses) do |klass|
+        Rails.configuration.cache_classes ? require(klass) : load(klass)
       end
     end
 
-    config.to_prepare &method(:activate).to_proc
-
+    config.to_prepare(&method(:activate).to_proc)
   end
 end

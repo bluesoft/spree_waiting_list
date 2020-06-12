@@ -2,8 +2,8 @@ Spree::Core::Engine.routes.draw do
   resources :stock_requests
 
   namespace :admin do
-    resources :reports, :only => [:index, :show] do
-      get 'stock_requests', :on => :collection
+    resources :reports, only: [:index, :show] do
+      get 'stock_requests', on: :collection
     end
   end
 end
